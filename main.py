@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from time import sleep
+from random import choice
 
 email = ""
 senha = ""
@@ -12,7 +13,7 @@ senha = ""
 class Sistema:
     tempo_espera = 120 #segundos
     fname = "database.txt"
-    resposta = "(coffee)"
+    respostas = ["(coffee)",".","(happyface)"]
 
     def __init__(self):
         #lê todas as mensagens já respondidas
@@ -72,10 +73,6 @@ class Sistema:
             sleep(1)
 
     def ler_mensagens(self):
-
-        #procura o body do documento, uso pra enviar as teclas
-        self.body = self.nav.find_element(By.TAG_NAME, "body")
-        
         #primeiro procura todas as datas das mensagens
         #depois filtra pra datas que só tem a hora (mensagens enviada no dia)
         #depois gera o elemento pai DIV, que encaixa todos os elementos da mensagem
@@ -86,7 +83,6 @@ class Sistema:
         mensagens.reverse()
         
         for mensagem in mensagens:
-        
             #pega o uuid da mensagem (o proprio teams que gera)
             uuid = mensagem.get_attribute('data-scroll-id');
 
@@ -102,14 +98,14 @@ class Sistema:
                     while not textbox:
                         textbox = self.nav.execute_script('''return arguments[0].querySelector('[data-tid*="ckeditor-replyConversation"]')''', mensagem)
                         sleep(0.5)
-
+                    
                     #envia a resposta desejada
-                    self.body.send_keys(self.resposta);
+                    textbox.send_keys(choice(self.respostas));
 
                     sleep(0.5)
 
                     #aperta enter pra enviar a mensagem
-                    self.body.send_keys(Keys.ENTER)
+                    textbox.send_keys(Keys.ENTER)
                     
                     #adiciona na lista de já respondidos
                     self.lista.append(uuid);
@@ -148,7 +144,10 @@ class Sistema:
     def iniciar_navegador(self):
         try:
             #abre o selenium
-            self.nav = webdriver.Firefox()
+            try:
+                self.nav = webdriver.Firefox()
+            except:
+                self.nav = webdriver.Chrome()
             #cria o objeto que faz o selenium esperar o driver
             self.wait_elem = WebDriverWait(self.nav, self.tempo_espera)
             return True
