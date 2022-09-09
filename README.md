@@ -3,7 +3,7 @@
 
 Esse foi um script que eu fiz na epoca da pandemia do COVID-19. Quando as aulas foram EAD, para ganhar a presença, nós eramos instruidos a responder as mensagens que os professores mandavam.
 
-Esse é um script tem uma funcionalidade bem simples, mas cumpriu os requisitos.
+Esse é um script tem uma funcionalidade bem simples, mas eu acho que cumpriu os requisitos.
 
 ## Processos
 
@@ -23,6 +23,13 @@ email = "email@email.com"
 senha = "senha"
 ```
 
+### Configurando as mensagens
+Você pode configurar uma lista de respostas, o programa vai escolher aleatoriamente entre elas e enviar a mensagem  
+
+```python
+respostas = ["Mensagem 1", "Mensagem 2", "Mensagem 3"]
+```
+
 ### Baixando o WebDriver
 Tambem é necessario baixar o WebDriver que você preferir e colocar na mesma pasta do script
 
@@ -33,5 +40,5 @@ Tambem é necessario baixar o WebDriver que você preferir e colocar na mesma pa
 
 Pull requests são sempre bem vindos.  
 
-Esse é um codigo que eu fiz quando eu estava no inicio do aprendizado na programação. Tambem não tive mais a oportunidade de testar, então se houver um erro eu agradeceria para que vocês abrissem um "issue"
+Esse é um codigo que eu fiz quando eu estava no inicio do aprendizado na programação. Tambem não tive mais a oportunidade de testar, então se houver um erro eu agradeceria se vocês abrissem um "issue" para esse erro
 
